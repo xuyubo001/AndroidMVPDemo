@@ -3,12 +3,15 @@ package com.nsu.edu.androidmvpdemo.login;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.nsu.edu.androidmvpdemo.R;
+
+import cn.lamppa.homework.model.vo.user.TeacherInfoVo;
 
 /**
  * Created by Anthony on 2016/2/15.
@@ -24,7 +27,7 @@ import com.nsu.edu.androidmvpdemo.R;
  * 最后activity显示结果
  */
 public class LoginActivity extends Activity implements LoginView, View.OnClickListener {
-
+    private final String TAG = LoginActivity.class.getSimpleName();
     private ProgressBar progressBar;
     private EditText username;
     private EditText password;
@@ -70,8 +73,12 @@ public class LoginActivity extends Activity implements LoginView, View.OnClickLi
     }
 
     @Override
-    public void navigateToHome() {
-// TODO       startActivity(new Intent(this, MainActivity.class));
+    public void navigateToHome(TeacherInfoVo teacherInfoVo) {
+
+       // Intent intent = new Intent(this, MainActivity.class);
+      //  intent.putExtra("teacher",teacherInfoVo);
+     //   startActivity(intent);
+        Log.d(TAG, "navigateToHome: " +teacherInfoVo.getName());
         Toast.makeText(this,"login success",Toast.LENGTH_SHORT).show();
         finish();
         hideProgress();

@@ -1,5 +1,6 @@
 package com.nsu.edu.androidmvpdemo.login;
 
+import com.alibaba.fastjson.JSON;
 import com.nsu.edu.androidmvpdemo.net.net.IHttpCallback;
 import com.nsu.edu.androidmvpdemo.net.net.NetManager;
 import org.apache.http.NameValuePair;
@@ -7,6 +8,8 @@ import org.apache.http.message.BasicNameValuePair;
 import java.util.ArrayList;
 import java.util.List;
 import com.nsu.edu.androidmvpdemo.utils.UrlPath;
+
+import cn.lamppa.homework.model.baseinfo.result.TeacherLoginResultInfoVo;
 
 
 /**
@@ -30,6 +33,8 @@ public class LoginModelImpl implements LoginModel {
           // 账户名密码
           params.add(new BasicNameValuePair("userCode", username));
           params.add(new BasicNameValuePair("password", password));
+
+
           login_schoolsercer.httpPost(UrlPath.PATHLOGIN(), null, params,
                   new IHttpCallback() {
                       @Override
@@ -41,9 +46,13 @@ public class LoginModelImpl implements LoginModel {
 
 
                               } else {
-                                  listener.onSuccess();
-                                  //info = JSON.parseObject(msg,
-                                 //         TeacherLoginResultInfoVo.class);
+
+                                  TeacherLoginResultInfoVo info = JSON.parseObject(msg,
+                                         TeacherLoginResultInfoVo.class);
+                                  if(info.getResult().equals("SUCCEED")){
+                                      listener.onSuccess(info.getTeacherInfoVo());
+
+                                  }
 
                               }
                           } catch (Exception e) {

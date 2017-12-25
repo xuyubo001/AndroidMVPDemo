@@ -1,5 +1,7 @@
 package com.nsu.edu.androidmvpdemo.login;
 
+import cn.lamppa.homework.model.vo.user.TeacherInfoVo;
+
 /**
  * Created by Anthony on 2016/2/15.
  * Class Note:
@@ -49,9 +51,9 @@ public class LoginPresenterImpl implements LoginPresenter, OnLoginFinishedListen
     }
 
     @Override
-    public void onSuccess() {
+    public void onSuccess(TeacherInfoVo teacherInfoVo) {
         if (loginView != null) {
-            loginView.navigateToHome();
+            loginView.navigateToHome(teacherInfoVo);
         }
     }
 

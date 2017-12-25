@@ -73,7 +73,7 @@ public class LoginActivity extends Activity implements LoginView, View.OnClickLi
     public void navigateToHome() {
 // TODO       startActivity(new Intent(this, MainActivity.class));
         Toast.makeText(this,"login success",Toast.LENGTH_SHORT).show();
-//        finish();
+        finish();
         hideProgress();
     }
 

@@ -1,11 +1,14 @@
 package com.nsu.edu.androidmvpdemo.login;
 
-import net.net.*;
+import com.nsu.edu.androidmvpdemo.net.net.IHttpCallback;
+import com.nsu.edu.androidmvpdemo.net.net.NetManager;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import java.util.ArrayList;
 import java.util.List;
-import utils.*;
+import com.nsu.edu.androidmvpdemo.utils.UrlPath;
+
+
 /**
  * Created by Anthony on 2016/2/15.
  * Class Note:延时模拟登陆（2s），如果名字或者密码为空则登陆失败，否则登陆成功

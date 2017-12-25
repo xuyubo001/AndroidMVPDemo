@@ -1,7 +1,11 @@
 package com.nsu.edu.androidmvpdemo.login;
 
-import android.os.Handler;
-import android.text.TextUtils;
+import net.net.*;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import java.util.ArrayList;
+import java.util.List;
+import utils.*;
 /**
  * Created by Anthony on 2016/2/15.
  * Class Note:延时模拟登陆（2s），如果名字或者密码为空则登陆失败，否则登陆成功
@@ -11,21 +15,58 @@ public class LoginModelImpl implements LoginModel {
     @Override
     public void login(final String username, final String password, final OnLoginFinishedListener listener) {
 
-        new Handler().postDelayed(new Runnable() {
-            @Override public void run() {
-                boolean error = false;
-                if (TextUtils.isEmpty(username)){
-                    listener.onUsernameError();//model层里面回调listener
-                    error = true;
-                }
-                if (TextUtils.isEmpty(password)){
-                    listener.onPasswordError();
-                    error = true;
-                }
-                if (!error){
-                    listener.onSuccess();
-                }
-            }
-        }, 2000);
+        login_schoolServer(username,password,listener);
     }
+
+
+    private void  login_schoolServer(String username,  String password, final OnLoginFinishedListener listener){
+      final NetManager login_schoolsercer = new NetManager();
+      login_schoolsercer.clearSession();
+          // 封装list中
+          List<NameValuePair> params = new ArrayList<NameValuePair>();
+          // 账户名密码
+          params.add(new BasicNameValuePair("userCode", username));
+          params.add(new BasicNameValuePair("password", password));
+          login_schoolsercer.httpPost(UrlPath.PATHLOGIN(), null, params,
+                  new IHttpCallback() {
+                      @Override
+                      public void onSuccess(String msg) {
+
+                          try {
+
+                              if (msg.equals("ERROR_NOT_LOGGED_IN")) {
+
+
+                              } else {
+                                  listener.onSuccess();
+                                  //info = JSON.parseObject(msg,
+                                 //         TeacherLoginResultInfoVo.class);
+
+                              }
+                          } catch (Exception e) {
+                              e.printStackTrace();
+
+                          } finally {
+
+                          }
+                      }
+
+                      @Override
+                      public void onStart() {
+
+                      }
+
+                      @Override
+                      public void onProgress(long progress, long maxValue) {
+
+                      }
+
+                      @Override
+                      public void onFailure(String err) {
+                          listener.onFail();
+                      }
+                  });
+
+      }
+
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
@@ -44,10 +45,11 @@ public class HttpRequest {
 	/**
 	 * 传给服务器客户端的CID 用于推送
 	 *
-	 * @param context
+	 * @param teacherId
 	 *            上下文
 	 */
-	public static void updateClientId(final Context context,String teacherId) {
+	public static void updateClientId(String teacherId) {
+		Log.d(TAG,"updateClientId    "+teacherId);
 		NetManager netManager = new NetManager();
 		List<NameValuePair> params = new ArrayList<>();
 
@@ -62,7 +64,7 @@ public class HttpRequest {
 
 			@Override
 			public void onSuccess(String msg) {
-
+               Logs.d(TAG,"updateClientId onSuccess");
 
 			}
 

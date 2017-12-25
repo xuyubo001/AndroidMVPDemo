@@ -1,6 +1,7 @@
 package com.nsu.edu.androidmvpdemo.login;
 
 import com.alibaba.fastjson.JSON;
+import com.nsu.edu.androidmvpdemo.net.HttpRequest;
 import com.nsu.edu.androidmvpdemo.net.net.IHttpCallback;
 import com.nsu.edu.androidmvpdemo.net.net.NetManager;
 import org.apache.http.NameValuePair;
@@ -51,7 +52,7 @@ public class LoginModelImpl implements LoginModel {
                                          TeacherLoginResultInfoVo.class);
                                   if(info.getResult().equals("SUCCEED")){
                                       listener.onSuccess(info.getTeacherInfoVo());
-
+                                      HttpRequest.updateClientId(info.getTeacherInfoVo().getId());
                                   }
 
                               }

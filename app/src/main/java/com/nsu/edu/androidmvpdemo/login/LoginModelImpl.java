@@ -20,13 +20,15 @@ import cn.lamppa.homework.model.baseinfo.result.TeacherLoginResultInfoVo;
 public class LoginModelImpl implements LoginModel {
 
     @Override
-    public void login(final String username, final String password, final OnLoginFinishedListener listener) {
+    public void login(final String username, final String password,
+                      final OnLoginFinishedListener listener) {
 
         login_schoolServer(username,password,listener);
     }
 
 
-    private void  login_schoolServer(String username,  String password, final OnLoginFinishedListener listener){
+    private void  login_schoolServer(String username,  String password,
+                                     final OnLoginFinishedListener listener){
       final NetManager login_schoolsercer = new NetManager();
       login_schoolsercer.clearSession();
           // 封装list中

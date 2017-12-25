@@ -9,7 +9,7 @@ public class UrlPath {
      * 高飞测试地址/lamppa-homework-services/
      **/
 
-    public static String BASEIP = "192.168.0.65";
+    public static String BASEIP = "192.168.0.91";
     public static String PORT = "8282";// 端口号
 
     private static String getBaseIP() {
